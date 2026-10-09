@@ -12,148 +12,126 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+ 
+          <link rel="style" href="src/components/style1.css">
+
   </head>
   <body class="bg-[#0e1015] text-slate-100 antialiased selection:bg-purple-600 selection:text-white">
-    <div id="root"></div>
-    <script>
 
-      import React, { useState } from 'react';
-import { Phone, MessageCircle, Menu, X, ArrowUpRight } from 'lucide-react';
-import { Logo } from './Logo';
+<header class="header">
+    <div class="container">
+        <div class="navbar">
 
-interface HeaderProps {
-  onOpenQuoteModal: (productId?: string) => void;
-  onNavigateSection: (id: string) => void;
+            <!-- Logo -->
+            <div class="logo-section">
+                #
+                    logo.png
+
+                    <div class="brand-text">
+                        <div class="brand-name">
+                            <span class="makhwane">MAKHWANE</span>
+                            <span class="pbh">PBH</span>
+                        </div>
+
+                        <span class="subtitle">
+                            Granite & Tombstones
+                        </span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <nav class="nav-menu">
+                <button onclick="navigateToSection('memorial-catalog')">Memorials</button>
+                <button onclick="navigateToSection('granite-countertops')">Granite Countertops</button>
+                <button onclick="navigateToSection('inscription-studio')">Inscription Studio</button>
+                <button onclick="navigateToSection('craftsmanship')">Craftsmanship</button>
+                <button onclick="navigateToSection('layby-pricing')">Lay-By Plans</button>
+                <button onclick="navigateToSection('contact-section')">Contact</button>
+            </nav>
+
+            <!-- Actions -->
+            <div class="actions">
+
+                https://wa.me/27720000000?text=Hello%20Makhwane%20Granite%2C%20I%20would%20like%20to%20inquire%20about%20a%20memorial%20tombstone.
+                    💬 WhatsApp Us
+                </a>
+
+                <button class="quote-btn" onclick="openQuoteModal()">
+                    Request Quote ↗
+                </button>
+
+                <button class="menu-toggle" id="menuToggle">
+                    ☰
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+
+        <button onclick="navigateToSection('memorial-catalog')">Memorials</button>
+        <button onclick="navigateToSection('granite-countertops')">Granite Countertops</button>
+        <button onclick="navigateToSection('inscription-studio')">Inscription Studio</button>
+        <button onclick="navigateToSection('craftsmanship')">Craftsmanship</button>
+        <button onclick="navigateToSection('layby-pricing')">Lay-By Plans</button>
+        <button onclick="navigateToSection('contact-section')">Contact</button>
+
+        https://wa.me/27720000000?text=Hello%20Makhwane%20Granite%2C%20I%20would%20like%20to%20inquire%20about%20a%20memorial.
+            💬 Chat via WhatsApp
+        </a>
+
+    </div>
+</header>
+
+
+
+
+
+
+    <!----==============================================================================================================================  -->
+ <script>
+
+   const menuToggle = document.getElementById("menuToggle");
+const mobileMenu = document.getElementById("mobileMenu");
+
+menuToggle.addEventListener("click", () => {
+    mobileMenu.classList.toggle("active");
+
+    menuToggle.textContent =
+        mobileMenu.classList.contains("active")
+            ? "✕"
+            : "☰";
+});
+
+document.getElementById("scrollTop").addEventListener("click", function(e){
+    e.preventDefault();
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+});
+
+function navigateToSection(id){
+    const section = document.getElementById(id);
+
+    if(section){
+        section.scrollIntoView({
+            behavior:"smooth"
+        });
+    }
+
+    mobileMenu.classList.remove("active");
+    menuToggle.textContent = "☰";
 }
 
-export const Header: React.FC<HeaderProps> = ({
-  onOpenQuoteModal,
-  onNavigateSection,
-}) => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const navLinks = [
-    { label: 'Memorials', target: 'memorial-catalog' },
-    { label: 'Granite Countertops', target: 'granite-countertops' },
-    { label: 'Inscription Studio', target: 'inscription-studio' },
-    { label: 'Craftsmanship', target: 'craftsmanship' },
-    { label: 'Lay-By Plans', target: 'layby-pricing' },
-    { label: 'Contact', target: 'contact-section' },
-  ];
-
-  const handleLinkClick = (target: string) => {
-    setMobileMenuOpen(false);
-    onNavigateSection(target);
-  };
-
-  return (
-    <header className="sticky top-0 z-40 w-full border-b border-neutral-800/80 bg-[#0e1015]/95 backdrop-blur-md">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-20 items-center justify-between">
-          {/* Zone 1: Single brand wordmark accompanied by official Makhwane PBH logo emblem */}
-          <div className="flex items-center gap-3">
-            <a
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-              className="group flex items-center gap-3 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded-md"
-            >
-              <Logo size="sm" variant="image-only" className="w-11 h-11" />
-              <div className="flex flex-col">
-                <div className="flex items-center gap-1.5">
-                  <span className="font-serif text-lg sm:text-xl font-extrabold tracking-wider text-slate-100 group-hover:text-purple-300 transition-colors whitespace-nowrap">
-                    MAKHWANE
-                  </span>
-                  <span className="font-serif italic font-bold text-purple-400 text-sm">
-                    PBH
-                  </span>
-                </div>
-                <span className="text-[10px] sm:text-[11px] tracking-[0.2em] uppercase text-slate-400 font-medium">
-                  Granite &amp; Tombstones
-                </span>
-              </div>
-            </a>
-          </div>
-
-          {/* Zone 2: 4-6 clean text navigation links with subtle hover underlines */}
-          <nav className="hidden lg:flex items-center gap-7 text-sm font-medium text-slate-300">
-            {navLinks.map((link) => (
-              <button
-                key={link.target}
-                onClick={() => handleLinkClick(link.target)}
-                className="whitespace-nowrap hover:text-purple-300 focus-visible:text-purple-300 transition-colors relative py-1 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-purple-500 after:transition-all after:duration-200"
-              >
-                {link.label}
-              </button>
-            ))}
-          </nav>
-
-          {/* Zone 3: 1-2 primary actions */}
-          <div className="flex items-center gap-3">
-            <a
-              href="https://wa.me/27720000000?text=Hello%20Makhwane%20Granite%2C%20I%20would%20like%20to%20inquire%20about%20a%20memorial%20tombstone."
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-medium text-slate-200 bg-neutral-900/90 border border-neutral-700/80 rounded-lg hover:border-purple-500/60 hover:text-white transition-all whitespace-nowrap"
-            >
-              <MessageCircle className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-              <span>WhatsApp Us</span>
-            </a>
-
-            <button
-              onClick={() => onOpenQuoteModal()}
-              className="px-4 py-2 text-xs sm:text-sm font-medium text-white bg-gradient-to-r from-purple-700 to-purple-900 hover:from-purple-600 hover:to-purple-800 border border-purple-500/50 rounded-lg shadow-sm hover:shadow-[0_0_15px_rgba(147,51,234,0.3)] transition-all whitespace-nowrap shrink-0 flex items-center gap-1.5"
-            >
-              <span>Request Quote</span>
-              <ArrowUpRight className="w-3.5 h-3.5 shrink-0" />
-            </button>
-
-            {/* Mobile menu toggle */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 text-slate-400 hover:text-white rounded-lg focus-visible:ring-2 focus-visible:ring-purple-500"
-              aria-label="Toggle Navigation Menu"
-            >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile drawer */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden border-b border-neutral-800 bg-[#0e1015] px-4 pt-3 pb-6 space-y-3">
-          <div className="grid grid-cols-1 gap-2 pt-2">
-            {navLinks.map((link) => (
-              <button
-                key={link.target}
-                onClick={() => handleLinkClick(link.target)}
-                className="text-left px-3 py-2 text-sm font-medium text-slate-200 hover:bg-neutral-900 hover:text-purple-400 rounded-md transition-colors"
-              >
-                {link.label}
-              </button>
-            ))}
-          </div>
-          <div className="pt-3 border-t border-neutral-800 flex flex-col gap-2">
-            <a
-              href="https://wa.me/27720000000?text=Hello%20Makhwane%20Granite%2C%20I%20would%20like%20to%20inquire%20about%20a%20memorial."
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 py-2.5 px-4 text-xs font-medium text-slate-200 bg-neutral-900 border border-neutral-700 rounded-lg"
-            >
-              <MessageCircle className="w-4 h-4 text-emerald-400" />
-              <span>Chat via WhatsApp</span>
-            </a>
-          </div>
-        </div>
-      )}
-    </header>
-  );
-};
-    </script>
-    <script type="module" src="src/main.tsx"></script>
+function openQuoteModal(){
+    alert("Open Quote Modal Here");
+}
+ </script>
   </body>
 </html>
 
